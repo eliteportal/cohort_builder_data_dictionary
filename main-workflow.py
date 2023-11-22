@@ -7,7 +7,7 @@ import json
 
 def import_config():
     """Import general local configuration for data model building"""
-    with open("../config.yml", "r") as f:
+    with open("./config.yml", "r") as f:
         config = yaml.safe_load(f)
 
     # paths to import files
@@ -42,18 +42,17 @@ def get_mainfest_names(json_object):
     # Manifest names in data model
     manifest_names_extracted = []
 
-    for i in json_object["@graph"]:
-        if i["@id"] == "bts:template":
-            manifest_names_extracted += [
-                t["@id"].replace("bts:", "") for t in i["schema:domainIncludes"]
-            ]
-
     # display names extracted
     manifest_display_names_extracted = []
 
     for i in json_object["@graph"]:
-        if i["@id"].replace("bts:", "") in (manifest_names_extracted):
-            manifest_display_names_extracted.append(i["sms:displayName"])
+        if "sms:requiresDependency" in i.keys():
+            for d in i["sms:requiresDependency"]:
+                if d["@id"] == "bts:Component":
+                    manifest_name = i["@id"].replace("bts:", "")
+                    manifest_names_extracted += [manifest_name]
+                    manifest_display_names_extracted.append(i["sms:displayName"])
+                    print(f"\033[0;32mManifest name: {manifest_name}\033[00m")
 
     # Create dictionary for lookup later
     manifest_name_relationships = dict(
@@ -82,8 +81,6 @@ def create_dca_config(json_model):
         "schema_version": "v1.1",
     }
 
-    records = ["FileMapToIndividual", "IndividualMetadata"]
-
     with open(json_model, "r") as jf:
         jo = json.load(jf)
 
@@ -105,3 +102,10 @@ def create_dca_config(json_model):
         "w",
     ) as f:
         f.write(json_formatted_str)
+
+
+if __name__ == "__main__":
+    with open("cohort-builder-model.jsonld", "r") as f:
+        json_data_model = json.load(f)
+
+    manifest_names = get_mainfest_names(json_data_model)

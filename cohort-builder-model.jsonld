@@ -1990,7 +1990,7 @@
                     "@id": "bts:SnpArray"
                 },
                 {
-                    "@id": "bts:'wholeGenomeSeq"
+                    "@id": "bts:WholeGenomeSeq"
                 }
             ],
             "sms:displayName": "Assay",
@@ -2007,13 +2007,25 @@
                     "@id": "bts:Assay"
                 },
                 {
+                    "@id": "bts:Diagnosis"
+                },
+                {
+                    "@id": "bts:Schema"
+                },
+                {
+                    "@id": "bts:Study"
+                },
+                {
                     "@id": "bts:FileName"
                 },
                 {
                     "@id": "bts:IndividualId"
                 },
                 {
-                    "@id": "bts:WholeGenomeSeq"
+                    "@id": "bts:MaxAge"
+                },
+                {
+                    "@id": "bts:MinAge"
                 }
             ],
             "schema:isPartOf": {
@@ -2041,10 +2053,10 @@
             "sms:validationRules": []
         },
         {
-            "@id": "bts:FileMapToIndividual",
+            "@id": "bts:FiletoIndividualMap",
             "@type": "rdfs:Class",
-            "rdfs:comment": "Template",
-            "rdfs:label": "FileMapToIndividual",
+            "rdfs:comment": "Template that maps each individual to a file in synapse",
+            "rdfs:label": "FiletoIndividualMap",
             "rdfs:subClassOf": [
                 {
                     "@id": "bts:Template"
@@ -2053,7 +2065,7 @@
             "schema:isPartOf": {
                 "@id": "http://schema.biothings.io"
             },
-            "sms:displayName": "FileMapToIndividual",
+            "sms:displayName": "File to Individual Map",
             "sms:required": "sms:false",
             "sms:requiresDependency": [
                 {
@@ -2061,6 +2073,9 @@
                 },
                 {
                     "@id": "bts:IndividualId"
+                },
+                {
+                    "@id": "bts:Component"
                 }
             ],
             "sms:validationRules": []
@@ -2068,11 +2083,11 @@
         {
             "@id": "bts:IndividualMetadata",
             "@type": "rdfs:Class",
-            "rdfs:comment": "Template for mapping individuals to files in synapse",
+            "rdfs:comment": "Information related to the individual",
             "rdfs:label": "IndividualMetadata",
             "rdfs:subClassOf": [
                 {
-                    "@id": "bts:Template"
+                    "@id": "schema:Thing"
                 }
             ],
             "schema:isPartOf": {
@@ -2081,6 +2096,9 @@
             "sms:displayName": "Individual Metadata",
             "sms:required": "sms:false",
             "sms:requiresDependency": [
+                {
+                    "@id": "bts:Component"
+                },
                 {
                     "@id": "bts:IndividualId"
                 },
@@ -2120,13 +2138,13 @@
             "sms:validationRules": []
         },
         {
-            "@id": "bts:Schema",
-            "@type": "rdfs:Class",
+            "@id": "bts:schema",
+            "@type": "rdf:Property",
             "rdfs:comment": "Schema property used in parent column",
-            "rdfs:label": "Schema",
-            "rdfs:subClassOf": [
+            "rdfs:label": "schema",
+            "schema:domainIncludes": [
                 {
-                    "@id": "schema:Thing"
+                    "@id": "bts:ValidValue"
                 }
             ],
             "schema:isPartOf": {
@@ -2152,6 +2170,15 @@
             "schema:rangeIncludes": [
                 {
                     "@id": "bts:LLFS"
+                },
+                {
+                    "@id": "bts:ILO"
+                },
+                {
+                    "@id": "bts:LC"
+                },
+                {
+                    "@id": "bts:LG"
                 }
             ],
             "sms:displayName": "Study",
@@ -2159,16 +2186,13 @@
             "sms:validationRules": []
         },
         {
-            "@id": "bts:template",
-            "@type": "rdf:Property",
+            "@id": "bts:Template",
+            "@type": "rdfs:Class",
             "rdfs:comment": "templalpte for dca",
-            "rdfs:label": "template",
-            "schema:domainIncludes": [
+            "rdfs:label": "Template",
+            "rdfs:subClassOf": [
                 {
-                    "@id": "bts:FileMapToIndividual"
-                },
-                {
-                    "@id": "bts:IndividualMetadata"
+                    "@id": "schema:Thing"
                 }
             ],
             "schema:isPartOf": {
@@ -2179,13 +2203,16 @@
             "sms:validationRules": []
         },
         {
-            "@id": "bts:ValidValue",
-            "@type": "rdfs:Class",
-            "rdfs:comment": "valid value to be added to columns",
-            "rdfs:label": "ValidValue",
-            "rdfs:subClassOf": [
+            "@id": "bts:validValue",
+            "@type": "rdf:Property",
+            "rdfs:comment": "Valid value to be added to columns",
+            "rdfs:label": "validValue",
+            "schema:domainIncludes": [
                 {
-                    "@id": "bts:DataProperty"
+                    "@id": "bts:SnpArray"
+                },
+                {
+                    "@id": "bts:WholeGenomeSeq"
                 }
             ],
             "schema:isPartOf": {
@@ -2217,7 +2244,7 @@
         {
             "@id": "bts:IndividualId",
             "@type": "rdfs:Class",
-            "rdfs:comment": "Unique individual identifier",
+            "rdfs:comment": "Unique individual identifier defined by the contributor",
             "rdfs:label": "IndividualId",
             "rdfs:subClassOf": [
                 {
@@ -2314,19 +2341,49 @@
             "sms:validationRules": []
         },
         {
-            "@id": "bts:schema",
+            "@id": "bts:dataType",
             "@type": "rdf:Property",
             "rdfs:comment": "TBD",
-            "rdfs:label": "schema",
+            "rdfs:label": "dataType",
             "schema:domainIncludes": [
                 {
-                    "@id": "bts:V"
+                    "@id": "bts:F"
                 },
                 {
-                    "@id": "bts:A"
+                    "@id": "bts:I"
                 },
                 {
                     "@id": "bts:L"
+                },
+                {
+                    "@id": "bts:E"
+                },
+                {
+                    "@id": "bts:"
+                },
+                {
+                    "@id": "bts:T"
+                },
+                {
+                    "@id": "bts:O"
+                },
+                {
+                    "@id": "bts:"
+                },
+                {
+                    "@id": "bts:I"
+                },
+                {
+                    "@id": "bts:N"
+                },
+                {
+                    "@id": "bts:D"
+                },
+                {
+                    "@id": "bts:I"
+                },
+                {
+                    "@id": "bts:V"
                 },
                 {
                     "@id": "bts:I"
@@ -2335,7 +2392,7 @@
                     "@id": "bts:D"
                 },
                 {
-                    "@id": "bts:V"
+                    "@id": "bts:U"
                 },
                 {
                     "@id": "bts:A"
@@ -2344,33 +2401,110 @@
                     "@id": "bts:L"
                 },
                 {
-                    "@id": "bts:U"
+                    "@id": "bts:"
                 },
                 {
-                    "@id": "bts:E"
+                    "@id": "bts:M"
+                },
+                {
+                    "@id": "bts:A"
+                },
+                {
+                    "@id": "bts:P"
                 }
             ],
             "schema:isPartOf": {
                 "@id": "http://schema.biothings.io"
             },
-            "sms:displayName": "schema",
+            "sms:displayName": "DataType",
             "sms:required": "sms:false",
             "sms:validationRules": []
         },
         {
-            "@id": "bts:'wholeGenomeSeq",
-            "@type": "rdfs:Class",
+            "@id": "bts:dataType",
+            "@type": "rdf:Property",
             "rdfs:comment": "TBD",
-            "rdfs:label": "'wholeGenomeSeq",
-            "rdfs:subClassOf": [
+            "rdfs:label": "dataType",
+            "schema:domainIncludes": [
                 {
-                    "@id": "bts:Assay"
+                    "@id": "bts:I"
+                },
+                {
+                    "@id": "bts:N"
+                },
+                {
+                    "@id": "bts:D"
+                },
+                {
+                    "@id": "bts:I"
+                },
+                {
+                    "@id": "bts:V"
+                },
+                {
+                    "@id": "bts:I"
+                },
+                {
+                    "@id": "bts:D"
+                },
+                {
+                    "@id": "bts:U"
+                },
+                {
+                    "@id": "bts:A"
+                },
+                {
+                    "@id": "bts:L"
+                },
+                {
+                    "@id": "bts:"
+                },
+                {
+                    "@id": "bts:M"
+                },
+                {
+                    "@id": "bts:E"
+                },
+                {
+                    "@id": "bts:T"
+                },
+                {
+                    "@id": "bts:A"
+                },
+                {
+                    "@id": "bts:D"
+                },
+                {
+                    "@id": "bts:A"
+                },
+                {
+                    "@id": "bts:T"
+                },
+                {
+                    "@id": "bts:A"
                 }
             ],
             "schema:isPartOf": {
                 "@id": "http://schema.biothings.io"
             },
-            "sms:displayName": "'wholeGenomeSeq",
+            "sms:displayName": "DataType",
+            "sms:required": "sms:false",
+            "sms:validationRules": []
+        },
+        {
+            "@id": "bts:Component",
+            "@type": "rdfs:Class",
+            "rdfs:comment": "TBD",
+            "rdfs:label": "Component",
+            "rdfs:subClassOf": [
+                {
+                    "@id": "bts:FiletoIndividualMap"
+                }
+            ],
+            "schema:isPartOf": {
+                "@id": "http://schema.biothings.io"
+            },
+            "sms:displayName": "Component",
             "sms:required": "sms:false",
             "sms:validationRules": []
         },
@@ -2388,6 +2522,74 @@
                 "@id": "http://schema.biothings.io"
             },
             "sms:displayName": "Sex",
+            "sms:required": "sms:false",
+            "sms:validationRules": []
+        },
+        {
+            "@id": "bts:ILO",
+            "@type": "rdfs:Class",
+            "rdfs:comment": "TBD",
+            "rdfs:label": "ILO",
+            "rdfs:subClassOf": [
+                {
+                    "@id": "bts:Study"
+                }
+            ],
+            "schema:isPartOf": {
+                "@id": "http://schema.biothings.io"
+            },
+            "sms:displayName": "ILO",
+            "sms:required": "sms:false",
+            "sms:validationRules": []
+        },
+        {
+            "@id": "bts:LC",
+            "@type": "rdfs:Class",
+            "rdfs:comment": "TBD",
+            "rdfs:label": "LC",
+            "rdfs:subClassOf": [
+                {
+                    "@id": "bts:Study"
+                }
+            ],
+            "schema:isPartOf": {
+                "@id": "http://schema.biothings.io"
+            },
+            "sms:displayName": "LC",
+            "sms:required": "sms:false",
+            "sms:validationRules": []
+        },
+        {
+            "@id": "bts:LG",
+            "@type": "rdfs:Class",
+            "rdfs:comment": "TBD",
+            "rdfs:label": "LG",
+            "rdfs:subClassOf": [
+                {
+                    "@id": "bts:Study"
+                }
+            ],
+            "schema:isPartOf": {
+                "@id": "http://schema.biothings.io"
+            },
+            "sms:displayName": "LG",
+            "sms:required": "sms:false",
+            "sms:validationRules": []
+        },
+        {
+            "@id": "bts:'wholeGenomeSeq",
+            "@type": "rdfs:Class",
+            "rdfs:comment": "TBD",
+            "rdfs:label": "'wholeGenomeSeq",
+            "rdfs:subClassOf": [
+                {
+                    "@id": "bts:WholeGenomeSeq"
+                }
+            ],
+            "schema:isPartOf": {
+                "@id": "http://schema.biothings.io"
+            },
+            "sms:displayName": "'wholeGenomeSeq",
             "sms:required": "sms:false",
             "sms:validationRules": []
         }

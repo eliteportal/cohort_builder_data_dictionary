@@ -3,14 +3,14 @@
     {
       "display_name": "FileMapToIndividual",
       "schema_name": "FileMapToIndividual",
-      "type": "records"
+      "type": "record"
     },
     {
       "display_name": "Individual Metadata",
       "schema_name": "IndividualMetadata",
-      "type": "records"
+      "type": "record"
     }
   ],
   "service_version": "v23.1.1",
-  "schema_version": ""
+  "schema_version": "v1.0.0"
 }
